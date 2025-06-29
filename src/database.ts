@@ -3,8 +3,8 @@
 import { randomUUID } from "node:crypto";
 
 import type { ZodTypeAny } from "zod";
-import type { Payload, RawPayload, Request } from "./types.js";
 import type { DatabaseManager } from "./databaseManager.js";
+import type { Payload, RawPayload, Request } from "./types.js";
 
 export class Database<T> {
   path: string;
