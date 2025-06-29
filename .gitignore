@@ -1,0 +1,5 @@
+/app
+/.env
+/storage
+logs.csv
+/node_modules
