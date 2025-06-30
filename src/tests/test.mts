@@ -1,7 +1,7 @@
 /** @format */
 
 import z from "zod";
-import { DatabaseManager } from "../databaseManager.js";
+import { DatabaseManager } from "../index.js";
 
 const manager = new DatabaseManager("ws://localhost:8080", "hello");
 
