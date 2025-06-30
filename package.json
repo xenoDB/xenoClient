@@ -1,7 +1,9 @@
 {
   "name": "@xenodb/client",
   "version": "1.0.0",
-  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Wrapper/client for @XenoDB/server. Provides a simplified abstraction for interacting with the database server.",
   "license": "MIT",
   "author": "XenoDB",
