@@ -43,6 +43,10 @@ export class Database<T> {
     if (!parse.success) throw new Error(JSON.stringify(parse.error, null, 2));
   }
 
+  async nuke(): Promise<boolean> {
+    return this.#makeReq<boolean>({ method: "NUKE" });
+  }
+
   async all(): Promise<{ [key: string]: T }> {
     return this.#makeReq<{ [key: string]: T }>({ method: "ALL" });
   }
