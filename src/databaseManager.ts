@@ -1,8 +1,8 @@
 /** @format */
 
 import { WebSocket } from "ws";
-import { EventEmitter } from "events";
 import { Database } from "./database.js";
+import { EventEmitter } from "node:events";
 
 import type { ZodTypeAny, z } from "zod";
 import type { ChildEvents, Response, Request } from "./types.js";
