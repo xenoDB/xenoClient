@@ -13,10 +13,11 @@ export class DatabaseManager extends EventEmitter<ChildEvents> {
   socketAddress: string;
   requests = new Map<string, Request<any>>();
 
-  constructor(socketAddress: string, auth: string) {
+  constructor(op: { url: string; auth: string } | { url: string; port: number; auth: string; secure?: boolean }) {
     super();
-    this.auth = auth;
-    this.socketAddress = socketAddress;
+
+    this.auth = op.auth;
+    this.socketAddress = "port" in op ? `ws${op.secure ? "s" : ""}://${op.url}:${op.port}` : op.url;
   }
 
   async connect() {
