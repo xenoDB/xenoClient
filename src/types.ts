@@ -22,7 +22,7 @@ export type Request<T> = {
 
 export type Payload<T = unknown> = BasePayload &
   (
-    | { method: "ALL" | "NUKE" }
+    | { method: "ALL" }
     | { method: "SET"; key: string; value: T }
     | { method: "GET" | "DELETE" | "HAS"; key: string }
     | { method: "GET_MANY" | "DELETE_MANY"; keys: string[] }
