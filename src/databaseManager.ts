@@ -4,7 +4,7 @@ import { WebSocket } from "ws";
 import { Database } from "./database.js";
 import { EventEmitter } from "node:events";
 
-import type { ZodTypeAny, z } from "zod";
+import type { z } from "zod";
 import type { ChildEvents, Response, Request } from "./types.js";
 
 export class DatabaseManager extends EventEmitter<ChildEvents> {
@@ -44,9 +44,9 @@ export class DatabaseManager extends EventEmitter<ChildEvents> {
    * @throws if webSocket connection is not open i.e is closed or connecting or closing
    */
   createDatabase<T = unknown>(path: string): Database<T>;
-  createDatabase<T extends ZodTypeAny>(path: string, schema: T): Database<z.infer<T>>;
+  createDatabase<T extends z.ZodType>(path: string, schema: T): Database<z.infer<T>>;
 
-  createDatabase(path: string, schema?: ZodTypeAny) {
+  createDatabase(path: string, schema?: z.ZodType) {
     if (this.webSocket?.readyState !== WebSocket.OPEN)
       throw new Error(`Please do "await <DatabaseManager>.connect()" before trying to create a database !`);
 

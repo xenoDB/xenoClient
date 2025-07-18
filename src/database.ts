@@ -2,16 +2,16 @@
 
 import { randomUUID } from "node:crypto";
 
-import type { ZodTypeAny } from "zod";
+import type { z } from "zod";
 import type { DatabaseManager } from "./databaseManager.js";
 import type { Payload, RawPayload, Request } from "./types.js";
 
 export class Database<T> {
   path: string;
-  #schema?: ZodTypeAny;
+  #schema?: z.ZodType;
   manager: DatabaseManager;
 
-  constructor(manager: DatabaseManager, path: string, schema?: ZodTypeAny) {
+  constructor(manager: DatabaseManager, path: string, schema?: z.ZodType) {
     this.path = path;
     this.#schema = schema;
     this.manager = manager;
@@ -32,7 +32,10 @@ export class Database<T> {
     this.manager.requests.set(requestId, request);
     this.manager.webSocket!.send(JSON.stringify({ ...PL, requestId, path: this.path } satisfies Payload));
 
-    request.timeout = setTimeout(() => request.reject(new Error("Request timed out")), 2500);
+    request.timeout = setTimeout(() => {
+      this.manager.requests.delete(requestId);
+      request.reject(new Error("Request timed out"));
+    }, 2500);
 
     return request.promise;
   }
