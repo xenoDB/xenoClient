@@ -3,7 +3,7 @@ export type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
 
-export interface ChildEvents {
+export interface ManagerEvents {
   error: [err: Error];
   disconnected: [address: string];
 }

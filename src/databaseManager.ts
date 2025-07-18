@@ -5,9 +5,9 @@ import { Database } from "./database.js";
 import { EventEmitter } from "node:events";
 
 import type { z } from "zod";
-import type { ChildEvents, Response, Request } from "./types.js";
+import type { ManagerEvents, Response, Request } from "./types.js";
 
-export class DatabaseManager extends EventEmitter<ChildEvents> {
+export class DatabaseManager extends EventEmitter<ManagerEvents> {
   auth: string;
   webSocket?: WebSocket;
   socketAddress: string;
