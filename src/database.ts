@@ -46,13 +46,14 @@ export class Database<T> {
     if (!parse.success) throw new Error(JSON.stringify(parse.error, null, 2));
   }
 
-  #validateKey<X extends boolean = true>(key: unknown): void;
-  #validateKey<X>(key: unknown, shouldThrow?: X): X extends true ? void : boolean;
-  #validateKey(key: unknown, shouldThrow = true) {
+  #validateKey(key: unknown): void;
+  #validateKey(key: unknown, shouldThrow: true): void;
+  #validateKey(key: unknown, shouldThrow: false): boolean;
+  #validateKey(key: unknown, shouldThrow = true): void | boolean {
     if (!key || typeof key !== "string" || key.length === 0 || key.length > 255)
       if (shouldThrow) throw new Error("Key must be of type string with length > 0 and < 255");
       else return false;
-    else return true;
+    return true;
   }
 
   #validateArrayOfKeys(keys: unknown) {
