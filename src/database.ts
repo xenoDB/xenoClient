@@ -34,8 +34,8 @@ export class Database<T> {
 
     request.timeout = setTimeout(() => {
       this.manager.requests.delete(requestId);
-      request.reject(new Error("Request timed out"));
-    }, 60000);
+      request.reject(new Error("Request timed out after 120 seconds."));
+    }, 120000);
 
     return request.promise;
   }
